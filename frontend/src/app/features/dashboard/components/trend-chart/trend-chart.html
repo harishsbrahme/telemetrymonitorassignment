@@ -1,0 +1,24 @@
+<div class="chart-buttons" role="group" aria-label="Chart zoom">
+  <button type="button" (click)="zoomIn()" title="Zoom in" aria-label="Zoom in">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+    </svg>
+  </button>
+  <button type="button" (click)="zoomOut()" title="Zoom out" aria-label="Zoom out">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <path d="M21 21l-4.3-4.3M8 11h6" />
+    </svg>
+  </button>
+  <button type="button" (click)="resetZoom()" title="Reset zoom" aria-label="Reset zoom">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+      <path d="M3 3v5h5" />
+    </svg>
+  </button>
+</div>
+
+<div class="chart-box">
+  <canvas baseChart [data]="chartData" [options]="chartOptions" type="line"></canvas>
+</div>
