@@ -1,0 +1,19 @@
+<div class="gauge">
+  <svg viewBox="0 0 120 120">
+    <circle class="track" cx="60" cy="60" r="50" [attr.stroke-dasharray]="arcLength + ' 314.16'" />
+
+    <circle
+      class="fill"
+      cx="60"
+      cy="60"
+      r="50"
+      [style.stroke]="color"
+      [attr.stroke-dasharray]="fillLength() + ' 314.16'"
+    />
+  </svg>
+
+  <div class="gauge-text">
+    <div class="gauge-value">{{ valueText }}</div>
+    <div class="gauge-unit">{{ unitText }}</div>
+  </div>
+</div>

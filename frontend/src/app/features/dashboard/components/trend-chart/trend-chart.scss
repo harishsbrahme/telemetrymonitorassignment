@@ -1,0 +1,55 @@
+.chart-buttons {
+  display: flex;
+  width: fit-content;
+  margin: 16px 0 0 auto;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+
+    &:hover {
+      background: var(--card);
+      color: var(--accent);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: scale(0.92);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.chart-box {
+  position: relative;
+  height: 220px;
+  margin-top: 8px;
+}
