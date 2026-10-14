@@ -6,13 +6,52 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "dev": "wait-on http://localhost:4200 && electron ."
+    "dev": "wait-on http://localhost:4200 && electron .",
+    "build:frontend": "cd ../frontend && ng build --base-href ./",
+    "start:build": "cross-env USE_BUILD=1 electron .",
+    "pack": "electron-builder --win"
   },
   "keywords": [],
   "type": "commonjs",
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "electron": "^44.7.2",
     "electron-builder": "^26.15.3",
     "wait-on": "^9.5.1"
+  },
+  "build": {
+    "appId": "com.example.telemetrymonitor",
+    "productName": "Telemetry Monitor",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../frontend/dist/frontend/browser",
+        "to": "app-frontend"
+      },
+      {
+        "from": "../backend",
+        "to": "app-backend",
+        "filter": [
+          "**/*",
+          "!.env",
+          "!nodemon.json"
+        ]
+      },
+      {
+        "from": "../backend/node_modules",
+        "to": "app-backend/node_modules",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    }
   }
 }

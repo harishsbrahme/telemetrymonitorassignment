@@ -1,6 +1,25 @@
 const { app, BrowserWindow } = require('electron');
 
 const devUrl = 'http://localhost:4200';
+const path = require('path');
+
+const useBuild = app.isPackaged || process.env.USE_BUILD === '1';
+
+let frontendFolder = path.join(__dirname, '..', '..', 'frontend', 'dist', 'frontend', 'browser');
+let backendFile = path.join(__dirname, '..', '..', 'backend', 'src', 'server.js');
+
+if (app.isPackaged) {
+  frontendFolder = path.join(process.resourcesPath, 'app-frontend');
+  backendFile = path.join(process.resourcesPath, 'app-backend', 'src', 'server.js');
+}
+
+function startBackend() {
+  try {
+    require(backendFile);
+  } catch (error) {
+    console.error('Backend failed to start', error);
+  }
+}
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -15,6 +34,12 @@ function createWindow() {
       nodeIntegration: false,
     },
   });
+
+  if (useBuild) {
+    startBackend();
+    win.loadFile(path.join(frontendFolder, 'index.html'));
+    return;
+  }
 
   win.loadURL(devUrl);
 }
